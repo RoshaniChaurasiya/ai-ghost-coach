@@ -23,7 +23,7 @@ export default function SessionDetails() {
 
   const messages = session.chatMessages ?? [];
 
-  // FIXED: Native Mobile System Tray Share + Desktop Clipboard Fallback Engine
+  // Native Mobile System Tray Share + Desktop Clipboard Fallback Engine
   const handleShareSession = async () => {
     const shareData = {
       title: 'Ghost Coach - Stance Feedback Report',

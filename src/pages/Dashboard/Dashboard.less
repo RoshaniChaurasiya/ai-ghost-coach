@@ -23,7 +23,6 @@
     font-size: 2.25rem;
     font-weight: @font-weight-bold;
     font-family: @font-heading;
-    /* Added Plus Jakarta Sans athletic token */
     letter-spacing: -0.03em;
     color: @text;
     margin: 0;
@@ -44,7 +43,6 @@
     font-size: 0.75rem;
     font-weight: @font-weight-semibold;
     font-family: @font-body;
-    /* Added Inter token */
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: @text-muted;
@@ -63,11 +61,9 @@
     gap: 1.75rem;
     width: 100%;
     align-items: start;
-    /* FIXED: Prevents cards from auto-stretching to match the tallest panel */
 
     @media (min-width: @breakpoint-lg) {
       grid-template-columns: 1fr 1.1fr;
-      /* Balances structural scaling columns */
     }
   }
 
@@ -99,7 +95,6 @@
     .dashboard__image-frame {
       flex-grow: 1;
       max-height: 380px;
-      /* Snaps the badminton canvas image tightly */
       background: #0b0f19;
 
       img {
@@ -115,7 +110,6 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    /* FIXED: Enables independent fluid scroll navigation maps */
     padding: 2rem 1.5rem;
     box-sizing: border-box;
 
@@ -124,10 +118,8 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      /* Prevents scrollbar lines while loading */
     }
 
-    /* Custom elegant premium scrollbar styling */
     &::-webkit-scrollbar {
       width: 6px;
     }
@@ -172,7 +164,6 @@
     gap: 0.75rem;
     width: 100%;
     margin-top: auto;
-    /* Locks button layout right to the baseline shell floor */
     padding-top: 0.5rem;
   }
 
@@ -190,16 +181,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    box-sizing: border-box;
-    
-    /* DEFAULT STATE OVERRIDES */
+    box-sizing: border-box;    
     background: fade(@success, 10%);
     border: 1px solid fade(@success, 30%);
     color: @success;
     cursor: not-allowed;
 
-    /* FIXED: This forces the button to turn gray and look un-clickable once disabled=true */
     &:disabled {
       background-color: @border-light;
       border-color: @border; 
@@ -259,7 +246,6 @@
     border: 1px solid @border;
     box-shadow: @shadow-sm;
     background: #0f172a;
-    /* Premium dark mask container fill */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -270,7 +256,6 @@
       height: auto !important;
       max-height: 380px !important;
       object-fit: contain !important;
-      /* Retains landscape media cleanly without vertical space holes */
       display: block;
     }
   }
@@ -321,13 +306,11 @@
     gap: 0.75rem;
     width: 100%;
     margin-top: auto;
-    /* Pushes button array firmly to baseline layout */
     font-family: @font-body;
   }
 
   &__btn-submit {
     flex: 2;
-    /* Allocates optimal prominent weight size to primary callout */
   }
 
   &__btn-clear {

@@ -6,11 +6,13 @@
   top: 0;
   z-index: 100;
   width: 100%;
-  background: rgba(var(--card-rgb), 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid @border;
   box-sizing: border-box;
+  background: rgba(17, 24, 39, 0.85);
+  background: var(--navbar-bg, rgba(17, 24, 39, 0.85));
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid @border;
   transition: background @transition-base, border-color @transition-base;
 
   &__inner {
@@ -163,8 +165,13 @@
   }
 
   &__icon {
-    &--sun { color: #f59e0b; }
-    &--moon { color: #3b82f6; }
+    &--sun {
+      color: #f59e0b;
+    }
+
+    &--moon {
+      color: #3b82f6;
+    }
   }
 
   &__overlay {
@@ -234,7 +241,7 @@
       padding-top: 1.25rem;
       box-sizing: border-box;
     }
-    
+
     &__btn-logout {
       flex-grow: 1;
       text-align: center;
@@ -243,6 +250,11 @@
 }
 
 @keyframes navbarFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

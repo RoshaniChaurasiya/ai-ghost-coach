@@ -24,7 +24,7 @@
      ========================================================================== */
   &__media {
     width: 100%;
-    height: 180px; /* Predictable visual container anchoring */
+    height: 180px;
     background: var(--background-secondary);
     border-bottom: 1px solid @border;
     overflow: hidden;
@@ -33,7 +33,7 @@
   &__image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Prevents awkward wide-stretching */
+    object-fit: cover;
     object-position: center;
     display: block;
   }
@@ -46,7 +46,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    flex-grow: 1; /* Pushes content down symmetrically */
+    flex-grow: 1;
     box-sizing: border-box;
   }
 
@@ -57,7 +57,6 @@
     margin: 0;
   }
 
-  /* Core metrics row styling matches the main dashboard template */
   &__metric-row {
     display: flex;
     justify-content: space-between;
@@ -74,13 +73,12 @@
     color: @primary;
   }
 
-  /* Text section wrapper with structural height padding allocation */
   &__fix-summary {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     margin-bottom: 0.5rem;
-    flex-grow: 1; /* Forces text blocks to evenly split remaining vertical space */
+    flex-grow: 1; 
   }
 
   &__label {
