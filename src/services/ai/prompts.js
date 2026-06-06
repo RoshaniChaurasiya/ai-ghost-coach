@@ -8,7 +8,6 @@ export function buildAnalysisPrompt(profile) {
 
   return `
 You are an expert professional sports coach and performance analyst.
-
 Analyze the uploaded image of an athlete.
 
 Player Profile:
@@ -21,7 +20,19 @@ Coaching Focus:
 - Sport-specific biomechanics, posture, and kinetic execution
 - ${SPORT_CONTEXT[sport] || 'general athletic performance'}
 
-Return ONLY valid JSON using the following template format:
+🚨 CRITICAL SPORT MISMATCH GUARDRAIL:
+Before analyzing, verify if the physical activity in the image matches the player profile sport (${sport}).
+If the image depicts a completely DIFFERENT sport (e.g., a badminton photo uploaded under a cricket profile), you MUST gracefully handle the mismatch. Do NOT hallucinate fake technique metrics. Instead, populate the exact JSON template keys with this specific fallback messaging:
+{
+  "overallScore": 1,
+  "strengths": ["Image mismatch detected by coaching engine."],
+  "areasToImprove": ["The uploaded image shows an athlete engaged in a different sport, not ${sport}.", "Cannot perform accurate biomechanical grading for ${sport} using this file."],
+  "priorityFix": "Please upload a clear, relevant photo or stance representing your active profile sport (${sport}) to receive tailored coaching guidance.",
+  "drillSuggestion": "Sport-specific technical drills are temporarily paused until a valid ${sport} action photo is uploaded.",
+  "confidenceLevel": "Low"
+}
+
+If the image correctly matches the profile sport (${sport}), provide a standard high-fidelity technical analysis following this exact valid JSON template format:
 {
   "overallScore": 1-10,
   "strengths": ["string"],
@@ -32,7 +43,8 @@ Return ONLY valid JSON using the following template format:
 }
 
 Rules:
-- Act as a supportive but direct coach.
+- Return ONLY valid JSON matching the template keys.
+- Do NOT nest objects or output extra trailing brackets.
 - Do not output markdown code blocks.
 - Be precise, actionable, and sport-specific.
 `;
