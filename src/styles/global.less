@@ -1,0 +1,166 @@
+@import './variables.less';
+@import './mixins.less';
+
+/* ==========================================================================
+   1. THEME VARIABLES DICTIONARY MAP
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  --background: #f5f9fc;
+  --background-secondary: #ecf2f9;
+  --card: #ffffff;
+  --card-hover: #f9fafb;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --gradient-bg: linear-gradient(135deg, #f5f9fc 0%, #ecf2f9 50%, #f0f7ff 100%);
+  --chart-grid: #e2e8f0;
+  --chart-text: #64748b;
+  --chart-tooltip-bg: #ffffff;
+  --chart-tooltip-border: #e2e8f0;
+  --chart-tooltip-text: #0f172a;
+  --color-primary: @primary; 
+}
+
+/* Supports both class-level or dataset-attribute theme selectors toggles safely */
+html.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #020617;
+  --background-secondary: #0f172a;
+  --card: #111827;
+  --card-hover: #1f223a;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #cbd5e1;
+  --border: #334155;
+  --border-light: #1f2937;
+  --gradient-bg: linear-gradient(135deg, #020617 0%, #111827 50%, #0f172a 100%);
+  --chart-grid: #334155;        
+  --chart-text: #94a3b8;        
+  --chart-tooltip-bg: #1e293b;  
+  --chart-tooltip-border: #334155;
+  --chart-tooltip-text: #f8fafc;
+}
+
+/* ==========================================================================
+   2. DOM ELEMENT NORMALIZATION BASELINE RESETS
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: @background;
+  color: @text;
+  font-family: @font-body;
+  font-weight: @font-weight-regular;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color @transition-base, border-color @transition-base;
+}
+
+/* Enforce the crisp geometric typography standard on headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: @font-heading;
+  font-weight: @font-weight-bold;
+  letter-spacing: -0.02em;
+  color: @text;
+  margin: 0;
+}
+
+/* ==========================================================================
+   3. DEFENSIVE APP LAYOUT CONTAINER SYSTEM
+   ========================================================================== */
+.app-container {
+  width: 100%;
+  max-width: @max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   4. ACCESSIBILITY & LAYOUT UTILITY CLASSES
+   ========================================================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   5. COMPONENT ELEMENTS (Global Buttons)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 46px;
+  padding: 0.75rem 1.5rem;
+  font-family: @font-body;
+  font-size: 0.95rem;
+  font-weight: @font-weight-semibold;
+  color: #FFFFFF;
+  border: none;
+  border-radius: @radius-sm;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  transition: all @transition-base;
+  .focus-visible();
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--primary {
+    background: @gradient-primary;
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px fade(@primary, 25%);
+
+    &:hover:not(:disabled) {
+      background-position: 100% 0%;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px fade(@primary, 35%);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px fade(@primary, 25%);
+    }
+  }
+
+  &--block {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@keyframes dashboardLayoutFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

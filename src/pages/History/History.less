@@ -1,0 +1,132 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.history-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* ==========================================================================
+     HEADER ARCHITECTURE (Fixed text clipping)
+     ========================================================================== */
+  &__header {
+    margin-bottom: 2.25rem;
+    animation: historySlideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: @font-weight-bold;
+    margin: 0 0 0.5rem 0;
+    padding-bottom: 0.1rem; /* Stops descender clipping on text gradient renderers */
+    letter-spacing: -0.02em;
+    background: @gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    color: @text-muted;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE GRID MODULE (Fixed cross-component stretch limits)
+     ========================================================================== */
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.75rem; /* Increased gap spacing for dashboard breathing room */
+    grid-template-columns: 1fr;
+    align-items: stretch; /* Enforces equal height alignment row-by-row */
+    animation: historySlideUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+    /* Scaled responsive columns matching design constraints */
+    @media (min-width: @breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: @breakpoint-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__grid-item {
+    display: flex;
+    box-sizing: border-box;
+    will-change: transform, opacity;
+
+    /* FIXED: Targets our explicit custom session card module context */
+    > .session-card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  /* ==========================================================================
+     EMPTY STATE DRAWER (Fixed token mapping variables)
+     ========================================================================== */
+  &__empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: @radius-lg;
+    border: 2px dashed @border;
+    background: @card; /* FIXED: Swapped out unmapped surface-card reference */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: @shadow-sm;
+    animation: historySlideUp 0.5s ease both;
+  }
+
+  &__empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+    line-height: 1;
+  }
+
+  &__empty-title {
+    font-size: 1.35rem;
+    font-weight: @font-weight-bold;
+    margin: 0 0 0.5rem 0;
+    color: @text;
+    letter-spacing: -0.01em;
+  }
+
+  &__empty-text {
+    color: @text-muted;
+    font-size: 0.95rem;
+    max-width: 420px;
+    margin: 0 0 1.75rem 0;
+    line-height: 1.6;
+  }
+
+  &__empty-cta {
+    min-height: 44px;
+    padding: 0.75rem 2rem;
+    max-width: 240px;
+  }
+}
+
+/* ==========================================================================
+   ANIMATION CONFIGURATIONS
+   ========================================================================== */
+@keyframes historySlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,104 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.notfound-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  /* Premium ambient blur background ring */
+  &__glow-backdrop {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: fade(@primary, 8%);
+    filter: blur(80px);
+    border-radius: 50%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 420px;
+    padding: 2rem;
+    box-sizing: border-box;
+    animation: notFoundPopIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  &__icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  &__title {
+    font-family: @font-heading;
+    font-size: 6.5rem;
+    font-weight: @font-weight-extrabold;
+    line-height: 1;
+    margin: 0;
+    /* Soft premium text gradient layout effect */
+    background: linear-gradient(180deg, @primary 0%, fade(@primary, 60%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    font-family: @font-heading;
+    font-size: 1.5rem;
+    font-weight: @font-weight-bold;
+    color: @text;
+    margin: 0.25rem 0 0.75rem 0;
+    letter-spacing: -0.01em;
+  }
+
+  &__text {
+    font-family: @font-body;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: @text-light; /* High contrast visibility setting */
+    margin: 0 0 2rem 0;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.5rem 1.75rem !important;
+    font-family: @font-body;
+    font-weight: @font-weight-semibold;
+    text-decoration: none;
+    transition: all @transition-fast ease;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px fade(@primary, 20%);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+/* Hardware accelerated fluid micro-animation */
+@keyframes notFoundPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

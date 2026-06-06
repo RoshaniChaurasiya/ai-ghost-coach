@@ -1,0 +1,296 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.session-details-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  animation: sessionDetailsSlideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  &__breadcrumbs {
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: @font-weight-medium;
+    color: @text-light;
+  }
+
+  &__breadcrumb-link {
+    color: @primary;
+    text-decoration: none;
+    transition: color @transition-fast;
+    .focus-visible();
+
+    &:hover {
+      color: @primary-dark;
+      text-decoration: underline;
+    }
+  }
+
+  &__breadcrumb-divider {
+    color: @text-light;
+    padding: 0 0.25rem;
+  }
+
+  &__breadcrumb-current {
+    color: @text-muted;
+    cursor: default;
+  }
+
+  &__header {
+    margin-bottom: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: @font-weight-bold;
+    margin: 0;
+    letter-spacing: -0.02em;
+    background: @gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ==========================================================================
+     CORE GRID LAYOUT
+     ========================================================================== */
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    align-items: start;
+
+    @media (min-width: @breakpoint-lg) {
+      grid-template-columns: 1.1fr 1.4fr;
+    }
+  }
+
+  /* ==========================================================================
+     LEFT COLUMN STICKY CONTAINER
+     ========================================================================== */
+  &__sticky-column {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (min-width: @breakpoint-lg) {
+      position: sticky;
+      top: calc(@nav-height + 1.5rem);
+      z-index: 10;
+    }
+  }
+
+  &__media-card {
+    background: @card;
+    border: 1px solid @border;
+    border-radius: @radius-lg;
+    box-shadow: @shadow-sm;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* ==========================================================================
+     AMBIENT IMAGE BLUR FRAME (Fixes side spacing beautifully)
+     ========================================================================== */
+  &__image-frame {
+    width: 100%;
+    border-radius: @radius;
+    overflow: hidden;
+    border: 1px solid @border-light;
+    position: relative;
+    box-sizing: border-box;
+    aspect-ratio: 3 / 4;
+    background: #0f172a;
+  }
+
+  &__blur-backdrop {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    filter: blur(20px) brightness(0.4);
+    transform: scale(1.1);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__source-img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Kept contain so nothing is cropped */
+    display: block;
+  }
+
+  /* ==========================================================================
+     METADATA PANEL
+     ========================================================================== */
+  &__meta-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  &__meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--background-secondary);
+    border: 1px solid @border;
+    border-radius: @radius-sm;
+    font-size: 0.875rem;
+  }
+
+  &__meta-label {
+    color: @text-muted;
+    font-weight: @font-weight-semibold;
+    text-transform: uppercase;
+    font-size: 0.725rem;
+    letter-spacing: 0.05em;
+  }
+
+  &__meta-value {
+    color: @text;
+    font-weight: @font-weight-bold;
+  }
+
+  /* ==========================================================================
+     NEW: QUICK ACTIONS CARD PANEL (Balances the right-side cascade void)
+     ========================================================================== */
+  &__actions-card {
+    background: @card;
+    border: 1px solid @border;
+    border-radius: @radius-lg;
+    box-shadow: @shadow-sm;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__actions-title {
+    font-size: 0.9rem;
+    font-weight: @font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: @text-muted;
+    margin: 0;
+  }
+
+  &__actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__action-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    background: var(--background-secondary);
+    border: 1px solid @border;
+    border-radius: @radius-sm;
+    color: @text;
+    font-size: 0.9rem;
+    font-weight: @font-weight-semibold;
+    text-align: left;
+    cursor: pointer;
+    transition: all @transition-fast ease;
+
+    span {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background: fade(@primary, 8%);
+      border-color: @primary;
+      color: @primary;
+      transform: translateX(4px);
+    }
+  }
+
+  /* ==========================================================================
+     RIGHT SIDE AND CHAT STYLING
+     ========================================================================== */
+  &__reports-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  &__chat-section {
+    width: 100%;
+    border-top: 1px solid @border;
+    padding-top: 2.25rem;
+    margin-top: 1rem;
+    box-sizing: border-box;
+  }
+
+  &__chat-title {
+    font-size: 1.5rem;
+    font-weight: @font-weight-bold;
+    color: @text;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.01em;
+  }
+
+  &__chat-subtitle {
+    font-size: 0.9rem;
+    color: @text-muted;
+    margin: 0 0 1.75rem 0;
+    line-height: 1.5;
+  }
+}
+
+@keyframes sessionDetailsSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+     FLEXIBLE AMBIENT IMAGE FRAME (Removes top/bottom blank space)
+     ========================================================================== */
+  &__image-frame {
+    width: 100%;
+    border-radius: @radius;
+    overflow: hidden;
+    border: 1px solid @border-light;
+    position: relative;
+    box-sizing: border-box;
+    aspect-ratio: auto; 
+    min-height: 260px;
+    max-height: 420px;
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img, 
+    [class*="image"],
+    > div {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: contain; 
+      display: block;
+    }
+  }

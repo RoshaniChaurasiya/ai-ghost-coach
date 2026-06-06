@@ -1,0 +1,157 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.score-chart {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.75rem 1.5rem 1.5rem 1.5rem;
+
+  /* Structural Content Alignment Header Grid */
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media (min-width: @breakpoint-md) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  &__text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-align: left;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: @font-weight-bold;
+    font-family: @font-heading;
+    color: @text;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  &__subtitle {
+    font-size: 0.85rem;
+    font-family: @font-body;
+    color: @text-muted;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ==========================================================================
+     CONTEXTUAL LEGEND INLINE BLOCKS
+     ========================================================================== */
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 1rem;
+
+     @media (min-width: @breakpoint-md) {
+      flex-direction: column;
+    }
+  }
+
+  &__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  &__legend-badge {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+
+    &--y {
+      background-color: var(--color-primary); /* Links directly to global action tokens */
+    }
+    &--x {
+      background-color: var(--chart-text);
+    }
+  }
+
+  &__legend-text {
+    font-size: 0.775rem;
+    font-family: @font-body;
+    color: @text-muted;
+    white-space: nowrap;
+    
+    strong {
+      color: @text;
+      font-weight: @font-weight-semibold;
+    }
+  }
+
+  &__container {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    text-align: center;
+    color: @text-muted;
+    font-size: 0.9rem;
+    padding: 2rem;
+    border: 1px dashed @border;
+    border-radius: @radius;
+    box-sizing: border-box;
+  }
+
+  /* ==========================================================================
+     PREMIUM FLOATING HOVER CARD COMPONENT
+     ========================================================================== */
+  &__tooltip {
+    background: var(--chart-tooltip-bg);
+    border: 1px solid var(--chart-tooltip-border);
+    padding: 0.75rem 1rem;
+    border-radius: @radius-sm;
+    box-shadow: @shadow-md;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    pointer-events: none;
+    box-sizing: border-box;
+    font-family: @font-body;
+    text-align: left;
+  }
+
+  &__tooltip-date {
+    font-size: 0.725rem;
+    font-weight: @font-weight-semibold;
+    color: @text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__tooltip-score-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  &__tooltip-label {
+    color: var(--chart-tooltip-text);
+  }
+
+  &__tooltip-value {
+    font-weight: @font-weight-bold;
+    color: var(--color-primary);
+  }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#2563eb"></rect>
+
+  <!-- Trophy -->
+  <path d="M22 14h20v8c0 6-4 10-10 10s-10-4-10-10v-8z" fill="#fbbf24"></path>
+
+  <!-- Handles -->
+  <path d="M22 16h-6c0 8 4 12 10 12" fill="none" stroke="#fbbf24" stroke-width="3"></path>
+  <path d="M42 16h6c0 8-4 12-10 12" fill="none" stroke="#fbbf24" stroke-width="3"></path>
+
+  <!-- Stem -->
+  <rect x="29" y="32" width="6" height="8" fill="#fbbf24"></rect>
+
+  <!-- Base -->
+  <rect x="22" y="42" width="20" height="6" rx="2" fill="#f59e0b"></rect>
+
+  <!-- Star -->
+  <path d="M32 6l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="white"></path>
+</svg>

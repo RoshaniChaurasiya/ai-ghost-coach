@@ -1,0 +1,135 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+/* ==========================================================================
+   THEME VARIANT CONFIGS
+   ========================================================================== */
+:root {
+  --skeleton-base: #e2e8f0;
+  --skeleton-shimmer: #f1f5f9;
+}
+
+html.dark {
+  --skeleton-base: #1e293b;
+  --skeleton-shimmer: #334155;
+}
+
+/* HARDWARE-ACCELERATED SHIMMER MIXIN */
+.skeleton-base() {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-shimmer) 50%,
+    var(--skeleton-base) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: @radius-sm;
+}
+
+/* ==========================================================================
+   ELEMENT MODULES
+   ========================================================================== */
+
+/* LINE ELEMENT */
+.skeleton-line {
+  .skeleton-base();
+  height: 1rem;
+  width: 100%;
+  margin: 0;
+  display: block;
+
+  &--sm { height: 0.85rem; }
+  &--lg { height: 1.5rem; }
+  &--xl { height: 2.25rem; }
+}
+
+/* IMAGE BOUNDS CONTAINER */
+.skeleton-image {
+  .skeleton-base();
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: @radius;
+}
+
+/* GROUP LOADING CONTAINERS */
+.skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+   LAYOUT SHARDS PREVIEW CARDS (BEM Compliant Components)
+   ========================================================================== */
+
+/* LOADING CARD */
+.skeleton-card {
+  width: 100%;
+  border-radius: @radius;
+  border: 1px solid @border;
+  background: @card;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    .skeleton-base();
+    height: 180px;
+    border-radius: 0;
+    border-bottom: 1px solid @border;
+  }
+
+  &__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+}
+
+/* LOADING REPORT FEEDBACK BLOCK */
+.skeleton-feedback {
+  width: 100%;
+  border-radius: @radius;
+  border: 1px solid @border;
+  background: @card;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+
+  &__title {
+    .skeleton-base();
+    height: 1.5rem;
+    width: 45%;
+    margin-bottom: 0.75rem;
+  }
+
+  &__item {
+    .skeleton-base();
+    height: 1rem;
+  }
+
+  &__footer {
+    .skeleton-base();
+    height: 2.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    border-radius: @radius-sm;
+  }
+}
+
+/* ==========================================================================
+   SHIMMER PIPELINE ANIMATION KEYFRAMES
+   ========================================================================== */
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

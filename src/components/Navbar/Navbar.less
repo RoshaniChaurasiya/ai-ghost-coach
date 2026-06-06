@@ -1,0 +1,248 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(var(--card-rgb), 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid @border;
+  box-sizing: border-box;
+  transition: background @transition-base, border-color @transition-base;
+
+  &__inner {
+    max-width: @max-width;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    min-height: @nav-height;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  /* ==========================================================================
+     BRAND LOGO DESIGN
+     ========================================================================== */
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: transform @transition-fast;
+    .focus-visible();
+
+    &:hover {
+      transform: translateY(-0.5px);
+    }
+
+    &-icon {
+      font-size: 1.25rem;
+    }
+
+    &-text {
+      font-size: 1.25rem;
+      font-weight: @font-weight-bold;
+      letter-spacing: -0.03em;
+      background: @gradient-primary;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  /* ==========================================================================
+     INTERACTIVE COMPONENT BUTTON CONTROL TRIGGERS
+     ========================================================================== */
+  &__toggle {
+    display: none;
+    font-size: 1.25rem;
+    background: transparent;
+    border: none;
+    color: @text;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: @radius-sm;
+    transition: all @transition-fast;
+    .focus-visible();
+
+    &:hover {
+      background: var(--background-secondary);
+      color: @primary;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__link {
+    padding: 0.5rem 1rem;
+    border-radius: @radius-sm;
+    font-size: 0.925rem;
+    font-weight: @font-weight-medium;
+    color: @text-muted;
+    text-decoration: none;
+    transition: all @transition-base;
+    .focus-visible();
+
+    &:hover {
+      color: @primary;
+      background: fade(@primary, 8%);
+    }
+
+    &--active {
+      background: fade(@primary, 10%);
+      color: @primary !important;
+      font-weight: @font-weight-bold;
+    }
+  }
+
+  /* ==========================================================================
+     USER CONTROLS TRAY SETS
+     ========================================================================== */
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-left: 1px solid @border;
+    padding-left: 1.5rem;
+  }
+
+  &__btn-logout {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: @text-muted;
+    font-size: 0.875rem;
+    font-weight: @font-weight-semibold;
+    padding: 0.5rem 1rem;
+    border-radius: @radius-sm;
+    cursor: pointer;
+    transition: all @transition-base;
+    .focus-visible();
+
+    &:hover {
+      background: var(--background-secondary);
+      color: @text;
+      border-color: @text-muted;
+    }
+  }
+
+  &__theme-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid @border;
+    background: @card;
+    color: @primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all @transition-base;
+    padding: 0;
+    .focus-visible();
+
+    &:hover {
+      background: var(--background-secondary);
+      color: @primary-dark;
+      transform: rotate(15deg);
+    }
+  }
+
+  &__icon {
+    &--sun { color: #f59e0b; }
+    &--moon { color: #3b82f6; }
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 90;
+    animation: navbarFadeIn 0.2s ease-out;
+  }
+
+  /* ==========================================================================
+     MOBILE MOBILE BREAKOUT LAYOUT ADAPTATIONS
+     ========================================================================== */
+  @media (max-width: @breakpoint-md) {
+    &__toggle {
+      display: inline-flex;
+    }
+
+    &__menu {
+      position: absolute;
+      top: @nav-height;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: @card;
+      border-bottom: 1px solid @border;
+      padding: 1.5rem;
+      gap: 1.25rem;
+      box-shadow: @shadow-lg;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all @transition-base;
+      z-index: 95;
+    }
+
+    &__menu--open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &__nav {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    &__link {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem 1rem;
+    }
+
+    &__user {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-left: none;
+      border-top: 1px solid @border;
+      padding-left: 0;
+      padding-top: 1.25rem;
+      box-sizing: border-box;
+    }
+    
+    &__btn-logout {
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes navbarFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

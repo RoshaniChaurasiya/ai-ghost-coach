@@ -1,0 +1,204 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+  background: @gradient-bg;
+  box-sizing: border-box;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, fade(@primary, 15%) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    pointer-events: none;
+    animation: floatOrb 10s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, fade(@info, 10%) 0%, transparent 70%);
+    bottom: -120px;
+    left: -80px;
+    pointer-events: none;
+    animation: floatOrb 12s ease-in-out infinite alternate-reverse;
+  }
+}
+
+/* ==========================================================================
+   AUTH CARD OBJECT CONTAINER STANDARD
+   ========================================================================== */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 1;
+  background: @card;
+  border: 1px solid @border;
+  border-radius: @radius-lg;
+  padding: 2.5rem 2rem;
+  box-shadow: @shadow;
+  box-sizing: border-box;
+  max-height: 92vh;
+  overflow-y: auto;
+  animation: registerSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  /* SCROLLBAR NORMALIZATION ELEMENT HOOKS */
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: fade(@primary, 20%);
+    border-radius: 99px;
+    &:hover { background: fade(@primary, 40%); }
+  }
+
+  &--wide {
+    max-width: 540px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    margin: 0;
+    flex: 1;
+    font-size: 1.75rem;
+    font-weight: @font-weight-bold;
+    letter-spacing: -0.02em;
+    background: @gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    color: @text-muted;
+    margin: 0 0 2rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  &__submit-btn {
+    margin-top: 0.5rem;
+    min-height: 46px;
+  }
+
+  /* THEME SWITCH CONTROL */
+  &__theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: @primary;
+    border: 1px solid @border;
+    border-radius: @radius-sm;
+    background: @card;
+    cursor: pointer;
+    transition: all @transition-base;
+    flex-shrink: 0;
+    margin-left: 0.75rem;
+    .focus-visible();
+
+    &:hover {
+      color: @primary-dark;
+      border-color: @primary;
+      background: var(--background-secondary);
+    }
+  }
+
+  /* LOWER SIGNPOSTING */
+  &__footer {
+    text-align: center;
+    margin-top: 1.75rem;
+    margin-bottom: 0;
+    color: @text-muted;
+    font-size: 0.875rem;
+    border-top: 1px solid @border;
+    padding-top: 1.25rem;
+  }
+
+  &__footer-text {
+    color: @text-muted;
+  }
+
+  &__footer-link {
+    color: @primary;
+    text-decoration: none;
+    font-weight: @font-weight-semibold;
+    
+    &:hover {
+      color: @primary-dark;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ==========================================================================
+   FLEXIBLE RESPONSIVE SUB-GRID FIELDS ROW
+   ========================================================================== */
+.form-fields-row {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+
+  @media (min-width: @breakpoint-md) {
+    grid-template-columns: 1fr 1fr;
+    
+    &--triple {
+      grid-template-columns: 0.6fr 1.2fr 1.2fr;
+    }
+  }
+}
+
+@keyframes floatOrb {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(20px, 15px) scale(1.05); }
+}
+
+@keyframes registerSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html.dark {
+  .auth-card {
+    border-color: @border;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+}

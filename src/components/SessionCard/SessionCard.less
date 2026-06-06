@@ -1,0 +1,127 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  background: @card;
+  border: 1px solid @border;
+  border-radius: @radius-lg;
+  box-shadow: @shadow-sm;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform @transition-base, box-shadow @transition-base, border-color @transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: @shadow-md;
+    border-color: fade(@primary, 25%);
+  }
+
+  /* ==========================================================================
+     1. IMAGE FRAME CONTAINER (Fixed Crop & Ratio Aspect)
+     ========================================================================== */
+  &__media {
+    width: 100%;
+    height: 180px; /* Predictable visual container anchoring */
+    background: var(--background-secondary);
+    border-bottom: 1px solid @border;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents awkward wide-stretching */
+    object-position: center;
+    display: block;
+  }
+
+  /* ==========================================================================
+     2. CARD DETAILS CHASSIS
+     ========================================================================== */
+  &__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1; /* Pushes content down symmetrically */
+    box-sizing: border-box;
+  }
+
+  &__time {
+    font-size: 0.8rem;
+    font-weight: @font-weight-semibold;
+    color: @text-light;
+    margin: 0;
+  }
+
+  /* Core metrics row styling matches the main dashboard template */
+  &__metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--background-secondary);
+    padding: 0.6rem 0.85rem;
+    border-radius: @radius-sm;
+    border: 1px solid @border;
+  }
+
+  &__value {
+    font-size: 1.1rem;
+    font-weight: @font-weight-bold;
+    color: @primary;
+  }
+
+  /* Text section wrapper with structural height padding allocation */
+  &__fix-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
+    flex-grow: 1; /* Forces text blocks to evenly split remaining vertical space */
+  }
+
+  &__label {
+    font-size: 0.725rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: @text-muted;
+    font-weight: @font-weight-bold;
+  }
+
+  &__fix-text {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: @text;
+    font-weight: @font-weight-medium;
+  }
+
+  /* ==========================================================================
+     3. VIEW DETAILS REDIRECT CTA BUTTON
+     ========================================================================== */
+  &__cta {
+    margin-top: auto; /* Firmly pins button along the baseline layout */
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: @font-weight-bold;
+    border-radius: @radius-sm;
+    border: 1px solid @border;
+    background: @card;
+    color: @primary;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    transition: all @transition-base;
+
+    &:hover {
+      background: @gradient-primary;
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 4px 12px fade(@primary, 25%);
+    }
+  }
+}

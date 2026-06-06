@@ -1,0 +1,15 @@
+@import './variables.less';
+
+.focus-visible() {
+  &:focus-visible {
+    outline: none;
+    box-shadow: @focus-ring;
+  }
+}
+
+.truncate-text(@max-width) {
+  max-width: @max-width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

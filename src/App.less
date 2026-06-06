@@ -1,0 +1,61 @@
+@import './styles/variables.less';
+@import './styles/mixins.less';
+
+.app-layout-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background: @background;
+  box-sizing: border-box;
+  position: relative;
+
+  /* ==========================================================================
+     ACCESSIBILITY SKIP LINK DESIGN (BEM Isolated)
+     ========================================================================== */
+  &__skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 1.25rem;
+    background: @primary;
+    color: #FFFFFF;
+    font-size: 0.875rem;
+    font-weight: @font-weight-bold;
+    text-decoration: none;
+    border-radius: 0 0 @radius-sm @radius-sm;
+    box-shadow: @shadow-md;
+    transition: transform @transition-fast ease;
+
+    &:focus {
+      left: 1.5rem;
+      top: 0;
+      outline: none;
+      box-shadow: @focus-ring, @shadow-lg;
+    }
+  }
+
+  /* ==========================================================================
+     MAIN ROUTING VIEWPORT LAYER WRAPPER
+     ========================================================================== */
+  &__viewport {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ==========================================================================
+   ADDING BASE TYPOGRAPHY AND LAYOUT STYLES
+   ========================================================================== */
+html, body {
+  font-family: @font-body;
+  font-weight: @font-weight-regular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: @text;
+}

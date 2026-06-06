@@ -1,0 +1,305 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.feedback-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left; /* FIX: Prevents text-centering bleed from parent dashboard components */
+  animation: slideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  /* ==========================================================================
+     HEADER ARCHITECTURE
+     ========================================================================== */
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media (min-width: @breakpoint-md) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__title {
+    font-family: @font-heading; /* Added premium heading token */
+    font-size: 1.4rem;
+    font-weight: @font-weight-bold;
+    color: @text;
+    margin: 0;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+
+  /* CONFIDENCE LEVEL INDICATOR BADGES */
+  &__confidence {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: @font-body;
+    font-size: 0.825rem;
+    font-weight: @font-weight-medium;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background: @border-light;
+    color: @text-muted;
+
+    &-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: @text-light;
+    }
+
+    strong {
+      font-weight: @font-weight-bold;
+    }
+
+    &--high {
+      background: fade(@success, 8%);
+      color: @success-dark;
+      border-color: fade(@success, 18%);
+      .feedback-card__confidence-dot { background-color: @success; }
+      strong { color: @success-dark; }
+    }
+
+    &--medium {
+      background: fade(@warning, 8%);
+      color: @warning-dark;
+      border-color: fade(@warning, 18%);
+      .feedback-card__confidence-dot { background-color: @warning; }
+      strong { color: @warning-dark; }
+    }
+
+    &--low {
+      background: fade(@danger, 8%);
+      color: @danger-dark;
+      border-color: fade(@danger, 18%);
+      .feedback-card__confidence-dot { background-color: @danger; }
+      strong { color: @danger-dark; }
+    }
+  }
+
+  /* ==========================================================================
+     SUB-PANEL CONTAINER WRAPPERS (Eliminates Text-Jumping Shifts)
+     ========================================================================== */
+  &__section {
+    background: @card;
+    border: 1px solid @border;
+    border-radius: @radius;
+    padding: 1.35rem;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left; /* FIX: Enforces a strict left alignment baseline */
+    transition: background @transition-base, border-color @transition-base, border-left-color @transition-base;
+
+    &-title {
+      font-family: @font-heading; /* Added premium heading token */
+      font-size: 1.05rem;
+      font-weight: @font-weight-bold;
+      color: @text;
+      margin: 0 0 0.85rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: left;
+    }
+
+    &-icon {
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    /* CONTEXT MODIFIERS ACCENTS */
+    &--success {
+      background: linear-gradient(135deg, @card 0%, var(--background-secondary) 100%);
+      border-color: fade(@success, 25%);
+      .feedback-card__section-icon { color: @success; }
+    }
+
+    &--warning {
+      background: linear-gradient(135deg, @card 0%, var(--background-secondary) 100%);
+      border-color: fade(@warning, 30%);
+      .feedback-card__section-icon { color: @warning-dark; }
+    }
+
+    &--priority {
+      border-left: 4px solid @primary;
+    }
+
+    &--drill {
+      border-left: 4px solid @info;
+    }
+
+    &--score-dashboard {
+      background: linear-gradient(135deg, @card 0%, var(--background-secondary) 100%);
+      border: 1px solid @border;
+    }
+  }
+
+  /* ==========================================================================
+     METRIC SCORE WORKSPACE METER LAYOUT
+     ========================================================================== */
+  &__score-layout {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  &__score-block {
+    display: flex;
+    align-items: baseline;
+    flex-shrink: 0;
+  }
+
+  &__score-value {
+    font-family: @font-heading;
+    font-size: 2.75rem;
+    font-weight: @font-weight-bold;
+    color: @primary;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  &__score-scale {
+    font-family: @font-heading;
+    font-size: 1.15rem;
+    font-weight: @font-weight-bold;
+    color: @text-light;
+  }
+
+  &__meter-block {
+    flex-grow: 1;
+  }
+
+  &__score-heading {
+    display: block;
+    font-family: @font-body;
+    font-size: 0.775rem;
+    font-weight: @font-weight-bold;
+    color: @text-muted;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+  }
+
+  &__meter-track {
+    width: 100%;
+    height: 10px;
+    background: @border-light;
+    border: 1px solid @border;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  &__meter-thumb {
+    height: 100%;
+    background: @gradient-primary;
+    border-radius: 9999px;
+    transition: width @transition-slow ease-out;
+  }
+
+  /* ==========================================================================
+     LIST ELEMENT SETS
+     ========================================================================== */
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem; /* Slightly widened gap for enhanced readability grid */
+    width: 100%;
+  }
+
+  &__item {
+    font-family: @font-body; /* Embedded standard body typography stack */
+    font-size: 0.925rem;     /* Refined typography scale sizing */
+    line-height: 1.55;
+    padding-left: 1.25rem;
+    position: relative;
+    color: @text-light;      /* Upgraded from @text-muted to ensure crisp contrast readability */
+    text-align: left;        /* Hardened alignment override check */
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    &--success::before {
+      background-color: @success;
+    }
+
+    &--warning::before {
+      background-color: @warning;
+    }
+  }
+
+  /* ==========================================================================
+     PRIORITY & DRILL LAYOUT SUB-ELEMENTS
+     ========================================================================== */
+  &__badge {
+    position: absolute;
+    top: 1.35rem;
+    right: 1.35rem;
+    font-family: @font-body;
+    font-size: 0.725rem;
+    font-weight: @font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: @primary;
+    background: fade(@primary, 8%);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    display: none;
+
+    @media (min-width: @breakpoint-md) {
+      display: block;
+    }
+  }
+
+  &__priority-text {
+    font-family: @font-body;
+    font-size: 0.95rem;
+    font-weight: @font-weight-medium;
+    color: @text;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+  }
+
+  &__drill-wrapper {
+    background: var(--background-secondary); /* Corrected mapping placeholder reference */
+    border-radius: @radius-sm;
+    padding: 1rem;
+    border: 1px solid @border;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &__drill-text {
+    font-family: @font-body;
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: @text-light; /* Upgraded text weight coloring visibility */
+    margin: 0;
+    text-align: left;
+  }
+}

@@ -1,0 +1,23 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.protected-route {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background: @background;
+  box-sizing: border-box;
+  animation: routeProtectionFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ==========================================================================
+   ROUTE MOUNT INTERACTION TRANSITION
+   ========================================================================== */
+@keyframes routeProtectionFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

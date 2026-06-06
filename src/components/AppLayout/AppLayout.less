@@ -1,0 +1,48 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.app-main {
+  width: 100%;
+  min-height: calc(100vh - @nav-height);
+  background: @background;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  /* FLUID ENTRY CONTAINER MATRIX */
+  &__container {
+    width: 100%;
+    max-width: @max-width;
+    
+    /* Mobile gutters: Compact and clear */
+    padding: 1.5rem 1.25rem 3rem 1.25rem; 
+    box-sizing: border-box;
+    will-change: transform, opacity;
+    animation: appLayoutFadeIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+    /* Tablet breakpoint padding buffers */
+    @media (min-width: @breakpoint-md) {
+      padding: 2.5rem 2rem 4rem 2rem; 
+    }
+
+    /* Desktop and Ultra-Wide screen padding constraints */
+    @media (min-width: @breakpoint-lg) {
+      padding: 3rem 4rem 5rem 4rem;
+    }
+  }
+}
+
+/* ==========================================================================
+   VISUAL ENTRY KEYFRAMES
+   ========================================================================== */
+@keyframes appLayoutFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px); /* Marginally increased for a smoother entry sweep */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

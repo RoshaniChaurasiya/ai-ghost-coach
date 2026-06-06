@@ -1,0 +1,74 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.image-preview {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__frame {
+    position: relative;
+    width: 100%;
+    border-radius: @radius;
+    background: var(--border-light);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: @shadow-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color @transition-base, box-shadow @transition-base;
+
+    &:hover {
+      border-color: fade(@primary, 30%);
+      box-shadow: @shadow-md; /* Compiles cleanly now! */
+    }
+  }
+
+  &__source-img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: contain;
+    display: block;
+    background: transparent;
+    transition: transform @transition-slow;
+
+    .image-preview:hover & {
+      transform: scale(1.015);
+    }
+  }
+
+  &__analysis-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(37, 99, 235, 0.04);
+    border: 2px solid fade(@primary, 40%);
+    border-radius: @radius;
+    animation: previewFadeIn 0.35s ease-out forwards;
+  }
+
+  &__vector-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border: 1.5px dashed fade(@primary, 25%);
+    border-radius: 50%;
+    animation: vectorRotate 24s linear infinite;
+  }
+}
+
+@keyframes previewFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vectorRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
